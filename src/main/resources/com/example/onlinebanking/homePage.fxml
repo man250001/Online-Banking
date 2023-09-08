@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.onlinebanking.HomePage"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.HomePage_Controller">
+   <children>
+      <Label alignment="CENTER" layoutY="6.0" prefHeight="43.0" prefWidth="135.0" text="Home Page">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="signout_link" layoutX="14.0" layoutY="52.0" text="Sign Out" />
+      <Hyperlink fx:id="checkingaccount_link" layoutX="106.0" layoutY="52.0" text="Checking Accounts" />
+      <Hyperlink fx:id="savingsaccount_link" layoutX="246.0" layoutY="52.0" text="Savings Accounts" />
+      <Hyperlink fx:id="transfer_link" layoutX="381.0" layoutY="52.0" text="Transfer" />
+      <Hyperlink fx:id="payBills_link" layoutX="473.0" layoutY="52.0" text="Pay Bills" />
+      <TableView layoutX="307.0" layoutY="126.0" prefHeight="245.0" prefWidth="262.0">
+        <columns>
+          <TableColumn prefWidth="189.5999755859375" text="Recent Transactons" />
+          <TableColumn prefWidth="72.79998779296875" text="Amount" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>
