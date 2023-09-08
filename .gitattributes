@@ -1,1 +1,1 @@
-*.fxml linguist-detectable
+*.fxml linguist-language=xml linguist-detectable
