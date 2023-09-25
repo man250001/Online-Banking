@@ -19,6 +19,6 @@
       </Label>
       <Label layoutX="183.0" layoutY="79.0" text="From:" />
       <Label layoutX="393.0" layoutY="79.0" text="To:" />
-      <Hyperlink fx:id="home_Link" layoutX="14.0" layoutY="51.0" text="Return Home" />
+      <Hyperlink fx:id="home_link" layoutX="14.0" layoutY="51.0" text="Return Home" />
    </children>
 </AnchorPane>
