@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class DBUtils {
 
@@ -25,6 +27,75 @@ public class DBUtils {
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void signUpUser(ActionEvent event, String username, String pwd) throws SQLException {
+        Connection conn;
+        PreparedStatement psCheckIfUserExists;
+        PreparedStatement psInsertUser = null;
+        ResultSet resultSet;
+
+        conn = DriverManager.getConnection("jdbc:mysql://localhost::3307/banking", "root", "password");
+        psCheckIfUserExists = conn.prepareStatement("Select * from user_logins Where username = ?");
+        psCheckIfUserExists.setString(1, username);
+        resultSet = psCheckIfUserExists.executeQuery();
+
+        if (resultSet.isBeforeFirst()){
+            System.out.println("User already exists!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("This user already exists!");
+            alert.show();
+        }
+        else
+        {
+            psInsertUser = conn.prepareStatement("insert into user_logins (username, pwd) values (?, ?)");
+            psInsertUser.setString(1, username);
+            psInsertUser.setString(2, pwd);
+            psInsertUser.executeUpdate();
+        }
+
+        resultSet.close();
+        psInsertUser.close();
+        psCheckIfUserExists.close();
+        conn.close();
+
+    }
+
+    public static boolean logInUser(ActionEvent event, String username, String pwd) throws SQLException {
+        try {
+            Connection conn;
+            PreparedStatement psCheckIfUserExists;
+            ResultSet resultSet;
+
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/banking", "root", "password");
+            psCheckIfUserExists = conn.prepareStatement("SELECT * FROM user_logins WHERE username = ?");
+            psCheckIfUserExists.setString(1, username);
+            resultSet = psCheckIfUserExists.executeQuery();
+
+
+            while (resultSet.next()) {
+                String retrievedPassword = resultSet.getString("pwd");
+
+                if (retrievedPassword.equals(pwd)) {
+                    resultSet.close();
+                    psCheckIfUserExists.close();
+                    conn.close();
+                    return true;
+                }
+
+            }
+            System.out.println("Passwords did not match!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Password is incorrect!");
+            alert.show();
+            resultSet.close();
+            psCheckIfUserExists.close();
+            conn.close();
+            return false;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
         }
     }
 }

@@ -17,5 +17,6 @@
             <Font size="23.0" />
          </font></Label>
       <Hyperlink fx:id="signup_link" alignment="CENTER" layoutX="324.0" layoutY="224.0" text="Sign up" />
+      <Label fx:id="incorrect_label" layoutX="213.0" layoutY="127.0" text="Username or Password incorrect" textFill="RED" visible="false" />
    </children>
 </Pane>
