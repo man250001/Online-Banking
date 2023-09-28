@@ -30,36 +30,43 @@ public class DBUtils {
         }
     }
 
-    public static void signUpUser(ActionEvent event, String username, String pwd) throws SQLException {
+    public static boolean signUpUser(ActionEvent event, String username, String pwd) throws SQLException {
         Connection conn;
         PreparedStatement psCheckIfUserExists;
         PreparedStatement psInsertUser = null;
         ResultSet resultSet;
 
-        conn = DriverManager.getConnection("jdbc:mysql://localhost::3307/banking", "root", "password");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/banking", "root", "password");
         psCheckIfUserExists = conn.prepareStatement("Select * from user_logins Where username = ?");
         psCheckIfUserExists.setString(1, username);
         resultSet = psCheckIfUserExists.executeQuery();
 
-        if (resultSet.isBeforeFirst()){
-            System.out.println("User already exists!");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("This user already exists!");
-            alert.show();
+        while (resultSet.next()) {
+            System.out.println("test");
+            if (resultSet.getString("username").equals(username)) {
+                System.out.println("User already exists!");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("This user already exists!");
+                alert.show();
+                resultSet.close();
+                psInsertUser.close();
+                psCheckIfUserExists.close();
+                conn.close();
+                return false;
+            }
         }
-        else
-        {
-            psInsertUser = conn.prepareStatement("insert into user_logins (username, pwd) values (?, ?)");
-            psInsertUser.setString(1, username);
-            psInsertUser.setString(2, pwd);
-            psInsertUser.executeUpdate();
-        }
+
+        psInsertUser = conn.prepareStatement("insert into user_logins (username, pwd) values (?, ?)");
+        psInsertUser.setString(1, username);
+        psInsertUser.setString(2, pwd);
+        psInsertUser.executeUpdate();
+
 
         resultSet.close();
         psInsertUser.close();
         psCheckIfUserExists.close();
         conn.close();
-
+        return true;
     }
 
     public static boolean logInUser(ActionEvent event, String username, String pwd) throws SQLException {

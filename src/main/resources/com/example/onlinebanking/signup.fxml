@@ -17,5 +17,6 @@
                 <Font size="23.0" />
             </font></Label>
         <Hyperlink fx:id="login_link" alignment="CENTER" layoutX="324.0" layoutY="224.0" text="Log in" />
+      <Label fx:id="taken_label" alignment="CENTER" layoutX="247.0" layoutY="127.0" text="Username is Taken!" textFill="RED" visible="false" />
     </children>
 </Pane>

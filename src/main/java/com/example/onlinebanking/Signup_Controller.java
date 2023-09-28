@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Signup_Controller implements Initializable {
@@ -18,10 +20,10 @@ public class Signup_Controller implements Initializable {
     private Hyperlink login_link;
 
     @FXML
-    private TextField password_tf;
+    private TextField password_tf, username_tf;
 
     @FXML
-    private TextField username_tf;
+    private Label taken_label;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -29,7 +31,16 @@ public class Signup_Controller implements Initializable {
             DBUtils.changeScene(event, "login.fxml", "Login", null, null);
         });
         Signup_bttn.setOnAction(event -> {
-            //Sign Up with DB integration
+            try {
+                if (DBUtils.signUpUser(event, username_tf.getText(), password_tf.getText())) {
+                    taken_label.setVisible(false);
+                    DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
+                }else{
+                    taken_label.setVisible(true);
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
         });
     }
 }
