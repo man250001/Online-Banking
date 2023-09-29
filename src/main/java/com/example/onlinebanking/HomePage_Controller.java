@@ -14,20 +14,10 @@ public class HomePage_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        checkingaccount_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "checkingAccount.fxml", "Checking Account", null, null);
-        });
-        payBills_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "payBills.fxml", "Pay Bills", null, null);
-        });
-        savingsaccount_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "savingsAccount.fxml", "Savings Account", null, null);
-        });
-        signout_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "login.fxml", "Login", null, null);
-        });
-        transfer_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "transferFunds.fxml", "Transfer Funds", null, null);
-        });
+        checkingaccount_link.setOnAction(event -> DBUtils.changeScene(event, "checkingAccount.fxml", "Checking Account", null, null));
+        payBills_link.setOnAction(event -> DBUtils.changeScene(event, "payBills.fxml", "Pay Bills", null, null));
+        savingsaccount_link.setOnAction(event -> DBUtils.changeScene(event, "savingsAccount.fxml", "Savings Account", null, null));
+        signout_link.setOnAction(event -> DBUtils.changeScene(event, "login.fxml", "Login", null, null));
+        transfer_link.setOnAction(event -> DBUtils.changeScene(event, "transferFunds.fxml", "Transfer Funds", null, null));
     }
 }

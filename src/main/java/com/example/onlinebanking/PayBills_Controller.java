@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unused")
 public class PayBills_Controller implements Initializable {
 
     @FXML
@@ -26,8 +27,6 @@ public class PayBills_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        home_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
-        });
+        home_link.setOnAction(event -> DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null));
     }
 }

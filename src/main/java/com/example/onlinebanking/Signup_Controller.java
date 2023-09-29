@@ -11,6 +11,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unused")
 public class Signup_Controller implements Initializable {
 
     @FXML
@@ -27,9 +28,7 @@ public class Signup_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        login_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "login.fxml", "Login", null, null);
-        });
+        login_link.setOnAction(event -> DBUtils.changeScene(event, "login.fxml", "Login", null, null));
         Signup_bttn.setOnAction(event -> {
             try {
                 if (DBUtils.signUpUser(event, username_tf.getText(), password_tf.getText())) {
@@ -39,7 +38,7 @@ public class Signup_Controller implements Initializable {
                     taken_label.setVisible(true);
                 }
             } catch (SQLException e) {
-                System.out.println(e);
+                throw new RuntimeException(e);
             }
         });
     }

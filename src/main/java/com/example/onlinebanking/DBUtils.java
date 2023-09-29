@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 
+@SuppressWarnings({"unused", "DataFlowIssue"})
 public class DBUtils {
 
     public static void changeScene(ActionEvent event, String _fxmlFile, String _title, String _username, String _password)
@@ -101,7 +102,6 @@ public class DBUtils {
             conn.close();
             return false;
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }
     }

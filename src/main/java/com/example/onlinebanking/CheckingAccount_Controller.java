@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unused")
 public class CheckingAccount_Controller implements Initializable {
 
     @FXML
@@ -29,8 +30,6 @@ public class CheckingAccount_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        home_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
-        });
+        home_link.setOnAction(event -> DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null));
     }
 }

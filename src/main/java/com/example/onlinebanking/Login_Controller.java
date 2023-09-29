@@ -37,12 +37,10 @@ public class Login_Controller implements Initializable {
                     incorrect_label.setVisible(true);
                 }
             } catch (SQLException e) {
-
+                throw new RuntimeException(e);
             }
 
         });
-        signup_link.setOnAction(event -> {
-            DBUtils.changeScene(event, "signup.fxml", "Sign Up", null, null);
-        });
+        signup_link.setOnAction(event -> DBUtils.changeScene(event, "signup.fxml", "Sign Up", null, null));
     }
 }
