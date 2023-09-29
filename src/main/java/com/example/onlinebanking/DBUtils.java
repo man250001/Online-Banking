@@ -90,8 +90,8 @@ public class DBUtils {
                     conn.close();
                     return true;
                 }
-
             }
+
             System.out.println("Passwords did not match!");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Password is incorrect!");
@@ -105,4 +105,6 @@ public class DBUtils {
             return false;
         }
     }
+
+
 }

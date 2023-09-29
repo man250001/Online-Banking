@@ -20,7 +20,7 @@ public class Signup_Controller implements Initializable {
     private Hyperlink login_link;
 
     @FXML
-    private TextField password_tf, username_tf;
+    private TextField password_tf, username_tf, lastname_tf, firstname_tf;
 
     @FXML
     private Label taken_label;
