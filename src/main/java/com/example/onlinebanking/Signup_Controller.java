@@ -2,10 +2,7 @@ package com.example.onlinebanking;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,7 +18,10 @@ public class Signup_Controller implements Initializable {
     private Hyperlink login_link;
 
     @FXML
-    private TextField password_tf, username_tf, lastname_tf, firstname_tf;
+    private TextField username_tf, lastname_tf, firstname_tf;
+
+    @FXML
+    private PasswordField password_pf;
 
     @FXML
     private Label taken_label;
@@ -31,7 +31,7 @@ public class Signup_Controller implements Initializable {
         login_link.setOnAction(event -> DBUtils.changeScene(event, "login.fxml", "Login", null, null));
         Signup_bttn.setOnAction(event -> {
             try {
-                if (DBUtils.signUpUser(event, username_tf.getText(), password_tf.getText(), firstname_tf.getText(), lastname_tf.getText())) {
+                if (DBUtils.signUpUser(event, username_tf.getText(), password_pf.getText(), firstname_tf.getText(), lastname_tf.getText())) {
                     taken_label.setVisible(false);
                     DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
                 }else{
