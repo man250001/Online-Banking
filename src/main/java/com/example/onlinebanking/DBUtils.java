@@ -39,7 +39,7 @@ public class DBUtils {
         Connection conn;
         PreparedStatement psCheckIfUserExists;
         PreparedStatement psInsertUser = null;
-        PreparedStatement psInsertUserLogin = null;
+        PreparedStatement psInsertUserLogin;
         ResultSet resultSet;
 
         // Connect to the database
