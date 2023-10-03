@@ -33,4 +33,13 @@ public class User {
                 this.userid = userid;
         }
         //endregion
+
+        //When user signs out return all bank account data to the database
+        public void signOutUser(){
+                //store account data in database
+
+                //reset all account data variables for the next user
+
+                //return user to login page
+        }
 }
