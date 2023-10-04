@@ -15,7 +15,7 @@ import java.sql.*;
 public class DBUtils {
 
     static User currentUser;
-
+    public static int tempBalance = 1000;
     // This method is used to change the scene when the user clicks on a hyperlink/button
     public static void changeScene(ActionEvent event, String _fxmlFile, String _title, String _username, String _password)
     {
@@ -39,6 +39,7 @@ public class DBUtils {
         Connection conn;
         PreparedStatement psCheckIfUserExists;
         PreparedStatement psInsertUser = null;
+        PreparedStatement psInsertAccount = null;
         PreparedStatement psInsertUserLogin;
         ResultSet resultSet;
 
@@ -86,16 +87,31 @@ public class DBUtils {
         psInsertUserLogin.setString(3, pwd);
         psInsertUserLogin.executeUpdate();
 
+        psInsertAccount = conn.prepareStatement("insert into accounts (userId, balance) values (?, ?)");
+        psInsertAccount.setInt(1, newUserId);
+        psInsertAccount.setInt(2, tempBalance);
+        psInsertAccount.executeUpdate();
+
+        // Get the account id of the new account that was just created
+        PreparedStatement psGetAccountId = conn.prepareStatement("select accountId from accounts where userId = ?");
+        psGetAccountId.setInt(1, newUserId);
+        ResultSet newAccount = psGetAccountId.executeQuery();
+        newAccount.next();
+        int newAccountId = newAccount.getInt("accountId");
+
         // Close all connections
+        newAccount.close();
+        psGetAccountId.close();
         newUser.close();
         psGetUserId.close();
         resultSet.close();
         psInsertUser.close();
+        psInsertAccount.close();
         psInsertUserLogin.close();
         psCheckIfUserExists.close();
         conn.close();
         // Create a new user object for the new user
-        currentUser = new User(firstname, lastname, newUserId);
+        currentUser = new User(firstname, lastname, newUserId, tempBalance, newAccountId);
         return true;
     }
 
@@ -118,15 +134,23 @@ public class DBUtils {
                 if (retrievedPassword.equals(pwd)) {
                     //Get f_name and l_name and userid from users using the username of the user that is logging in
                     PreparedStatement psGetUserDetails = conn.prepareStatement("SELECT * FROM users WHERE userId = ?");
+                    PreparedStatement psGetUserAccount = conn.prepareStatement("SELECT * FROM accounts WHERE userId = ?");
                     psGetUserDetails.setInt(1, resultSet.getInt("userId"));
+                    psGetUserAccount.setInt(1, resultSet.getInt("userId"));
                     ResultSet userDetails = psGetUserDetails.executeQuery();
+                    ResultSet userAccount = psGetUserAccount.executeQuery();
+                    userAccount.next();
                     userDetails.next();
                     String firstname = userDetails.getString("f_name");
                     String lastname = userDetails.getString("l_name");
                     int userid = userDetails.getInt("userId");
+                    int balance = userAccount.getInt("balance");
+                    int accountNumber = userAccount.getInt("accountId");
                     // Create a new user object for the user that is logging in
-                    currentUser = new User(firstname, lastname, userid);
+                    currentUser = new User(firstname, lastname, userid, balance, accountNumber);
                     // Closes all connections
+                    userAccount.close();
+                    psGetUserAccount.close();
                     userDetails.close();
                     psGetUserDetails.close();
                     resultSet.close();
@@ -150,5 +174,9 @@ public class DBUtils {
         }
     }
 
-
+    //region get currentUser
+    public static User getUser() {
+        return currentUser;
+    }
+    //endregion
 }

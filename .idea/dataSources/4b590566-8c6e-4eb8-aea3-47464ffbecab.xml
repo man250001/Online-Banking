@@ -1028,8 +1028,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="299" parent="1" name="banking">
       <Current>1</Current>
-      <IntrospectionTimestamp>2023-09-29.05:01:04</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-09-29.13:01:04</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-10-04.06:32:44</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-10-04.14:32:44</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="300" parent="1" name="mysql.infoschema">
@@ -1063,8 +1063,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="307" parent="304" name="account_id">
-      <AutoIncrement>3</AutoIncrement>
+    <column id="307" parent="304" name="accountId">
+      <AutoIncrement>1</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1084,7 +1084,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <RefTableName>users</RefTableName>
     </foreign-key>
     <index id="311" parent="304" name="PRIMARY">
-      <ColNames>account_id</ColNames>
+      <ColNames>accountId</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
@@ -1135,7 +1135,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>username</UnderlyingIndexName>
     </key>
     <column id="322" parent="306" name="userId">
-      <AutoIncrement>2</AutoIncrement>
+      <AutoIncrement>3</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>

@@ -25,5 +25,6 @@
           <TableColumn prefWidth="72.79998779296875" text="Amount" />
         </columns>
       </TableView>
+      <Hyperlink fx:id="admin_link" layoutX="5.0" layoutY="375.0" text="Admin Page" />
    </children>
 </AnchorPane>
