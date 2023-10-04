@@ -1,0 +1,18 @@
+.body {
+    -fx-background-color: linear-gradient(to left bottom, #7b0b09, #1b7b74);
+}
+
+.white_text {
+    -fx-text-fill: white;
+}
+
+.black_text {
+    -fx-text-fill: black;
+}
+
+.banner {
+    -fx-background-color: #000000;
+    -fx-background-radius: 0;
+    -fx-border-color: #1b7b74;
+    -fx-border-width: 0;
+}

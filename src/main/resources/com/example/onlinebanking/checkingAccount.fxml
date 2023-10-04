@@ -8,20 +8,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.CheckingAccount_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.CheckingAccount_Controller">
    <children>
-      <ChoiceBox fx:id="account_Selector" layoutX="101.0" layoutY="140.0" prefWidth="150.0" />
-      <Label alignment="CENTER" prefHeight="54.0" prefWidth="201.0" text="Checking Account">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="home_link" layoutX="14.0" layoutY="54.0" text="Return Home" />
-      <TableView fx:id="transaction_Table" layoutX="326.0" layoutY="78.0" prefHeight="262.0" prefWidth="246.0">
+      <ChoiceBox fx:id="account_Selector" layoutX="101.0" layoutY="187.0" prefWidth="150.0" stylesheets="@banking.css" />
+      <TableView fx:id="transaction_Table" layoutX="325.0" layoutY="112.0" prefHeight="262.0" prefWidth="246.0" stylesheets="@banking.css">
         <columns>
           <TableColumn fx:id="transactionName_col" prefWidth="172.0" text="Transaction name" />
           <TableColumn fx:id="amount_col" prefWidth="73.60001220703126" text="Amount" />
         </columns>
       </TableView>
+      <AnchorPane prefHeight="94.0" prefWidth="602.0" styleClass="banner" stylesheets="@banking.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="201.0" styleClass="white_text" stylesheets="@banking.css" text="Checking Account">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="home_link" layoutX="14.0" layoutY="54.0" stylesheets="@banking.css" text="Return Home" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

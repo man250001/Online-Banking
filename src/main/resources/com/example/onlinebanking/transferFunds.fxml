@@ -7,18 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.TransferFunds_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.TransferFunds_Controller">
    <children>
-      <ChoiceBox fx:id="from_box" layoutX="123.0" layoutY="103.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="to_box" layoutX="326.0" layoutY="103.0" prefWidth="150.0" />
-      <Button fx:id="transfer_bttn" layoutX="270.0" layoutY="200.0" mnemonicParsing="false" text="Transfer" />
-      <Label alignment="CENTER" prefHeight="51.0" prefWidth="172.0" text="Transfer Money">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="183.0" layoutY="79.0" text="From:" />
-      <Label layoutX="393.0" layoutY="79.0" text="To:" />
-      <Hyperlink fx:id="home_link" layoutX="14.0" layoutY="51.0" text="Return Home" />
+      <ChoiceBox fx:id="from_box" layoutX="123.0" layoutY="151.0" prefWidth="150.0" stylesheets="@banking.css" />
+      <ChoiceBox fx:id="to_box" layoutX="326.0" layoutY="151.0" prefWidth="150.0" stylesheets="@banking.css" />
+      <Button fx:id="transfer_bttn" layoutX="270.0" layoutY="248.0" mnemonicParsing="false" stylesheets="@banking.css" text="Transfer" />
+      <Label layoutX="183.0" layoutY="127.0" styleClass="white_text" stylesheets="@banking.css" text="From:" />
+      <Label layoutX="393.0" layoutY="127.0" styleClass="white_text" stylesheets="@banking.css" text="To:" />
+      <AnchorPane prefHeight="87.0" prefWidth="600.0" styleClass="banner" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="51.0" prefWidth="172.0" styleClass="white_text" stylesheets="@banking.css" text="Transfer Money">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="home_link" layoutX="14.0" layoutY="44.0" stylesheets="@banking.css" text="Return Home" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
