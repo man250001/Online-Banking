@@ -27,14 +27,14 @@ return_link.setOnAction(event -> DBUtils.changeScene(event, "homePage.fxml", "Ho
             try {
                 DBUtils.getUser().deposit(Integer.parseInt(deposit_tf.getText()));
             } catch (Exception e) {
-                throw e;
+                throw new RuntimeException(e);
             }
         });
         withdraw_btn.setOnAction(event -> {
             try {
                 DBUtils.getUser().withdraw(Integer.parseInt(withdraw_tf.getText()));
             } catch (Exception e) {
-                throw e;
+                throw new RuntimeException(e);
             }
         });
     }
