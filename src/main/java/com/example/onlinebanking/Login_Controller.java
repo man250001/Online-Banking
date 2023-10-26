@@ -36,10 +36,9 @@ public class Login_Controller implements Initializable {
                 }else{
                     incorrect_label.setVisible(true);
                 }
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
         });
         signup_link.setOnAction(event -> DBUtils.changeScene(event, "signup.fxml", "Sign Up", null, null));
     }
