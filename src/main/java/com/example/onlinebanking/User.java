@@ -65,7 +65,7 @@ public class User {
 
                         //store account data in database
 
-                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/banking", "root", "password");
+                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
                         psSetUserData = conn.prepareStatement("UPDATE accounts SET balance = ? WHERE accountId = ?");
                         psSetUserData.setInt(1, balance);
                         psSetUserData.setInt(2, accountNumber);

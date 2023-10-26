@@ -44,7 +44,7 @@ public class DBUtils {
         ResultSet resultSet;
 
         // Connect to the database
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/banking", "root", "password");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
         psCheckIfUserExists = conn.prepareStatement("Select * from user_logins Where username = ?");
         psCheckIfUserExists.setString(1, username);
         resultSet = psCheckIfUserExists.executeQuery();
@@ -116,13 +116,13 @@ public class DBUtils {
     }
 
     // This method is used to log in a user when supplying a correct username and password
-    public static boolean logInUser(ActionEvent event, String username, String pwd) throws SQLException {
+    public static boolean logInUser(ActionEvent event, String username, String pwd) throws Exception {
         try {
             Connection conn;
             PreparedStatement psCheckIfUserExists;
             ResultSet resultSet;
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/banking", "root", "password");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
             psCheckIfUserExists = conn.prepareStatement("SELECT * FROM user_logins WHERE username = ?");
             psCheckIfUserExists.setString(1, username);
             resultSet = psCheckIfUserExists.executeQuery();
@@ -170,7 +170,7 @@ public class DBUtils {
             conn.close();
             return false;
         } catch (Exception e) {
-            return false;
+            throw new Exception(e);
         }
     }
 
