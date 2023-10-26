@@ -1,19 +1,25 @@
 package com.example.onlinebanking;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 @SuppressWarnings("unused")
 public class User {
 
-        String firstname, lastname;
-        int userid, balance, accountNumber;
+        //note to Moron(Self) get accounts and make withdraw/deposit functionality work
 
-        public User(String firstname, String lastname, int userid, int balance, int accountNumber) {
+        String firstname, lastname;
+        int userid, total_balance;
+        ArrayList<Account> accounts;
+        ArrayList<Transaction> transactions;
+
+        public User(String firstname, String lastname, int userid, int total_balance, ArrayList<Account> accounts) {
                 this.firstname = firstname;
                 this.lastname = lastname;
                 this.userid = userid;
-                this.balance = balance;
-                this.accountNumber = accountNumber;
+                this.total_balance = total_balance;
+                this.accounts = accounts;
+                transactions = new ArrayList<>();
         }
 
         //region Getters and Setters
@@ -36,26 +42,21 @@ public class User {
                 this.userid = userid;
         }
         public int getBalance() {
-                return balance;
+                return total_balance;
         }
         public void setBalance(int balance) {
-                this.balance = balance;
+                this.total_balance = balance;
         }
-        public int getAccountNumber() {
-                return accountNumber;
+        public ArrayList<Integer> getAccounts() {
+                return accounts;
         }
-        public void setAccountNumber(int accountNumber) {
-                this.accountNumber = accountNumber;
+        public void setAccounts(ArrayList<Integer> accounts) {
+                this.accounts = accounts;
         }
         //endregion
 
         //Withdrawal and Deposit
-        public void withdraw(int amount){
-                balance -= amount;
-        }
-        public void deposit(int amount){
-                balance += amount;
-        }
+
 
         //When user signs out return all bank account data to the database
         public void signOutUser(){
@@ -63,16 +64,27 @@ public class User {
                         Connection conn;
                         PreparedStatement psSetUserData;
 
-                        //store account data in database
-
                         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
                         psSetUserData = conn.prepareStatement("UPDATE accounts SET balance = ? WHERE accountId = ?");
-                        psSetUserData.setInt(1, balance);
-                        psSetUserData.setInt(2, accountNumber);
-                        psSetUserData.executeUpdate();
+                        //store account data in database
+                        for (int accountNumber: accounts) {
+                                psSetUserData.setInt(1, total_balance);
+                                psSetUserData.setInt(2, accountNumber);
+                                psSetUserData.executeUpdate();
+                        }
+
+                        psSetUserData = conn.prepareStatement("INSERT INTO transactions (amount, descriptor, accountId) VALUES (?, ?, ?)");
+                        //store transaction data in database
+                        for (Transaction transaction: transactions) {
+                                psSetUserData.setInt(1, transaction.getAmount());
+                                psSetUserData.setString(2, transaction.getDescriptor());
+                                psSetUserData.setInt(3, transaction.getAccountNumber());
+                                psSetUserData.executeUpdate();
+                        }
+
                         //reset all account data variables for the next user
-                        balance = 0;
-                        accountNumber = 0;
+                        total_balance = 0;
+                        accounts = null;
                         firstname = null;
                         lastname = null;
                         userid = 0;

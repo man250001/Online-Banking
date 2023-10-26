@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 @SuppressWarnings({"unused", "DataFlowIssue"})
 public class DBUtils {
@@ -72,12 +73,13 @@ public class DBUtils {
         psInsertUser.executeUpdate();
 
         // Get the user id of the user that was just created
-        PreparedStatement psGetUserId = conn.prepareStatement("select userId from users where f_name = ? and l_name = ?");
+        PreparedStatement psGetUserId = conn.prepareStatement("select userId from users where f_name = ? and l_name = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         psGetUserId.setString(1, firstname);
         psGetUserId.setString(2, lastname);
 
         ResultSet newUser = psGetUserId.executeQuery();
-        newUser.next();
+        newUser.afterLast();
+        newUser.previous();
         int newUserId = newUser.getInt("userId");
 
         // Add a new user login for the user that was just created
@@ -97,7 +99,7 @@ public class DBUtils {
         psGetAccountId.setInt(1, newUserId);
         ResultSet newAccount = psGetAccountId.executeQuery();
         newAccount.next();
-        int newAccountId = newAccount.getInt("accountId");
+        ArrayList<Integer> newAccountId = new ArrayList<>(newAccount.getInt("accountId"));
 
         // Close all connections
         newAccount.close();
@@ -139,15 +141,18 @@ public class DBUtils {
                     psGetUserAccount.setInt(1, resultSet.getInt("userId"));
                     ResultSet userDetails = psGetUserDetails.executeQuery();
                     ResultSet userAccount = psGetUserAccount.executeQuery();
-                    userAccount.next();
                     userDetails.next();
                     String firstname = userDetails.getString("f_name");
                     String lastname = userDetails.getString("l_name");
                     int userid = userDetails.getInt("userId");
-                    int balance = userAccount.getInt("balance");
-                    int accountNumber = userAccount.getInt("accountId");
+                    int total_balance = 0;
+                    ArrayList<Integer> accountNumbers = new ArrayList<>();
+                    while (userAccount.next()){
+                        accountNumbers.add(userAccount.getInt("accountId"));
+                        total_balance += userAccount.getInt("balance");
+                    }
                     // Create a new user object for the user that is logging in
-                    currentUser = new User(firstname, lastname, userid, balance, accountNumber);
+                    currentUser = new User(firstname, lastname, userid, total_balance, accountNumbers);
                     // Closes all connections
                     userAccount.close();
                     psGetUserAccount.close();
