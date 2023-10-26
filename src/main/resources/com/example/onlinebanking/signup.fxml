@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.Signup_Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.Signup_Controller">
     <Button fx:id="Signup_bttn" layoutX="224.0" layoutY="281.0" mnemonicParsing="false" stylesheets="@banking.css" text="Sign up" />
     <TextField fx:id="username_tf" layoutX="224.0" layoutY="133.0" promptText="Username" stylesheets="@banking.css" />
     <Hyperlink fx:id="login_link" alignment="CENTER" layoutX="324.0" layoutY="282.0" stylesheets="@banking.css" text="Log in" />

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.CheckingAccount_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.CheckingAccount_Controller">
    <children>
       <ChoiceBox fx:id="account_Selector" layoutX="101.0" layoutY="187.0" prefWidth="150.0" stylesheets="@banking.css" />
       <TableView fx:id="transaction_Table" layoutX="325.0" layoutY="112.0" prefHeight="262.0" prefWidth="246.0" stylesheets="@banking.css">

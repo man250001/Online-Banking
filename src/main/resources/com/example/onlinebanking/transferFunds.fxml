@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.TransferFunds_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@banking.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlinebanking.TransferFunds_Controller">
    <children>
       <ChoiceBox fx:id="from_box" layoutX="123.0" layoutY="151.0" prefWidth="150.0" stylesheets="@banking.css" />
       <ChoiceBox fx:id="to_box" layoutX="326.0" layoutY="151.0" prefWidth="150.0" stylesheets="@banking.css" />
