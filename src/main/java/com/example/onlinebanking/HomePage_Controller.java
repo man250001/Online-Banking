@@ -1,10 +1,18 @@
 package com.example.onlinebanking;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomePage_Controller implements Initializable {
@@ -15,9 +23,24 @@ public class HomePage_Controller implements Initializable {
     @FXML
     private Label balance_label;
 
+    @FXML
+    private ChoiceBox<Account> account_cb;
+
+    @FXML
+    private TableView<String> transaction_tbl;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        balance_label.setText("Balance: $" + DBUtils.getUser().getBalance());
+        // Get the user's accounts from DBUtils
+        List<Account> userAccounts = DBUtils.getUser().getAccounts();
+
+        // Create an ObservableList of the user's accounts
+        ObservableList<Account> accountList = FXCollections.observableArrayList(userAccounts);
+
+        // Set the items property of the ChoiceBox to the ObservableList
+        account_cb.setItems(accountList);
+
+        balance_label.setText("Select an account to view balance");
         checkingaccount_link.setOnAction(event -> DBUtils.changeScene(event, "checkingAccount.fxml", "Checking Account", null, null));
         payBills_link.setOnAction(event -> DBUtils.changeScene(event, "payBills.fxml", "Pay Bills", null, null));
         savingsaccount_link.setOnAction(event -> DBUtils.changeScene(event, "savingsAccount.fxml", "Savings Account", null, null));
@@ -27,5 +50,24 @@ public class HomePage_Controller implements Initializable {
         });
         transfer_link.setOnAction(event -> DBUtils.changeScene(event, "transferFunds.fxml", "Transfer Funds", null, null));
         admin_link.setOnAction(event -> DBUtils.changeScene(event, "adminPage.fxml", "Admin", null, null));
+        account_cb.setOnAction(event -> {
+            // Get the selected account from the ChoiceBox
+            Account selectedAccount = account_cb.getSelectionModel().getSelectedItem();
+
+            // Set the balance label to the balance of the selected account
+            balance_label.setText("$" + selectedAccount.getBalance());
+
+            
+            List<String> userTransactions = DBUtils.getUser().getTransactionsByAccountNum(selectedAccount.getAccountNumber());
+            ObservableList<String> transactionList = FXCollections.observableArrayList(userTransactions);
+
+            
+            transaction_tbl.setItems(transactionList);
+            TableColumn<String, String> transactionCol = new TableColumn<>("Transaction");
+            transactionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+
+            
+            transaction_tbl.getColumns().setAll(transactionCol);
+        });
     }
 }

@@ -57,6 +57,29 @@ public class User {
 
         //Withdrawal and Deposit
 
+        public ArrayList<String> getTransactionsByAccountNum(int accountId){
+                ArrayList<String> tList = new ArrayList<>();
+                try {
+                        for (Account a : accounts){
+                                if (a.getAccountNumber() == accountId){
+                                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
+                                        PreparedStatement psGetTransactions = conn.prepareStatement("SELECT * FROM transactions WHERE accountId = ?");
+
+                                        psGetTransactions.setInt(1, accountId);
+                                        ResultSet transactions = psGetTransactions.executeQuery();
+                                        while (transactions.next()){
+                                                tList.add(transactions.getString("amount") + transactions.getString("descriptor")); 
+                                        
+                                        }
+                                }
+                        }
+                } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                }
+                return tList;
+        }
+
+
 
         //When user signs out return all bank account data to the database
         public void signOutUser(){
@@ -68,8 +91,8 @@ public class User {
                         psSetUserData = conn.prepareStatement("UPDATE accounts SET balance = ? WHERE accountId = ?");
                         //store account data in database
                         for (Account a: accounts) {
-                                psSetUserData.setInt(1, total_balance);
-                                psSetUserData.setInt(2, );
+                                psSetUserData.setInt(1, a.getBalance());
+                                psSetUserData.setInt(2, a.getAccountNumber());
                                 psSetUserData.executeUpdate();
                         }
 

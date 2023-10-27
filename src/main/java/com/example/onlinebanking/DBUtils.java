@@ -1,5 +1,6 @@
 package com.example.onlinebanking;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,13 +25,18 @@ public class DBUtils {
             FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(_fxmlFile));
             Parent root = loader.load();
 
-
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setTitle(_title);
-            stage.setResizable(false);
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            Platform.runLater(() -> {
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                stage.setTitle(_title);
+                stage.setResizable(false);
+                stage.setScene(new Scene(root, 600, 400));
+                stage.show();
+            });
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NullPointerException e){
+            throw new RuntimeException(e);
+        }catch (RuntimeException e){
             throw new RuntimeException(e);
         }
     }

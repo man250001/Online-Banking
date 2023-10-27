@@ -13,6 +13,24 @@ public class Account {
         transactions = new ArrayList<>();
     }
 
+    //region Getters and Setters
+    public int getBalance() {
+        return balance;
+    }
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+    //endregion
+
     public void withdraw(int amount){
         balance -= amount;
         transactions.add(new Transaction(amount, "-", accountNumber));
