@@ -44,9 +44,9 @@ public class HomePage_Controller implements Initializable {
         account_cb.setItems(accountList);
 
         balance_label.setText("Select an account to view balance");
-        checkingaccount_link.setOnAction(event -> DBUtils.changeScene(event, "checkingAccount.fxml", "Checking Account", null, null));
+        checkingaccount_link.setOnAction(event -> DBUtils.changeScene(event, "Deposit.fxml", "Checking Account", null, null));
         payBills_link.setOnAction(event -> DBUtils.changeScene(event, "payBills.fxml", "Pay Bills", null, null));
-        savingsaccount_link.setOnAction(event -> DBUtils.changeScene(event, "savingsAccount.fxml", "Savings Account", null, null));
+        savingsaccount_link.setOnAction(event -> DBUtils.changeScene(event, "Withdraw.fxml", "Savings Account", null, null));
         signout_link.setOnAction(event -> {
             DBUtils.getUser().signOutUser();
             DBUtils.changeScene(event, "login.fxml", "Login", null, null);

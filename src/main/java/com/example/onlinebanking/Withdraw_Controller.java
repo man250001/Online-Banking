@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @SuppressWarnings("unused")
-public class SavingsAccount_Controller implements Initializable {
+public class Withdraw_Controller implements Initializable {
 
     @FXML
     private ChoiceBox<?> account_Selector;
