@@ -3,6 +3,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -23,7 +24,11 @@
             </Label>
          </children>
       </AnchorPane>
-      <TableView fx:id="transaction_tbl" layoutX="373.0" layoutY="126.0" prefHeight="245.0" prefWidth="135.0" stylesheets="@banking.css" />
+      <TableView fx:id="transaction_tbl" layoutX="373.0" layoutY="126.0" prefHeight="245.0" prefWidth="135.0" stylesheets="@banking.css">
+        <columns>
+          <TableColumn fx:id="Amount_col" prefWidth="131.20001220703125" text="Amount" />
+        </columns>
+      </TableView>
       <Hyperlink fx:id="admin_link" layoutX="5.0" layoutY="375.0" stylesheets="@banking.css" text="Admin Page" />
       <Label fx:id="balance_label" alignment="CENTER" layoutX="31.0" layoutY="182.0" styleClass="white_text" stylesheets="@banking.css" text="Balance: $">
          <font>

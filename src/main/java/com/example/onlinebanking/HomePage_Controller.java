@@ -29,6 +29,9 @@ public class HomePage_Controller implements Initializable {
     @FXML
     private TableView<String> transaction_tbl;
 
+    @FXML
+    private TableColumn<String, String> Amount_col;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Get the user's accounts from DBUtils
@@ -63,11 +66,10 @@ public class HomePage_Controller implements Initializable {
 
             
             transaction_tbl.setItems(transactionList);
-            TableColumn<String, String> transactionCol = new TableColumn<>("Transaction");
-            transactionCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+            Amount_col.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 
             
-            transaction_tbl.getColumns().setAll(transactionCol);
+            transaction_tbl.getColumns().setAll(Amount_col);
         });
     }
 }
