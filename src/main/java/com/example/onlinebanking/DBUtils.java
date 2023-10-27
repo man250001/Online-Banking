@@ -99,7 +99,8 @@ public class DBUtils {
         psGetAccountId.setInt(1, newUserId);
         ResultSet newAccount = psGetAccountId.executeQuery();
         newAccount.next();
-        ArrayList<Integer> newAccountId = new ArrayList<>(newAccount.getInt("accountId"));
+        ArrayList<Account> newAccountId = new ArrayList<>();
+        newAccountId.add(new Account(tempBalance, newAccount.getInt("accountId")));
 
         // Close all connections
         newAccount.close();
@@ -146,9 +147,9 @@ public class DBUtils {
                     String lastname = userDetails.getString("l_name");
                     int userid = userDetails.getInt("userId");
                     int total_balance = 0;
-                    ArrayList<Integer> accountNumbers = new ArrayList<>();
+                    ArrayList<Account> accountNumbers = new ArrayList<>();
                     while (userAccount.next()){
-                        accountNumbers.add(userAccount.getInt("accountId"));
+                        accountNumbers.add(new Account(userAccount.getInt("balance"), userAccount.getInt("accountId")));
                         total_balance += userAccount.getInt("balance");
                     }
                     // Create a new user object for the user that is logging in
