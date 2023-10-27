@@ -47,10 +47,10 @@ public class User {
         public void setBalance(int balance) {
                 this.total_balance = balance;
         }
-        public ArrayList<Integer> getAccounts() {
+        public ArrayList<Account> getAccounts() {
                 return accounts;
         }
-        public void setAccounts(ArrayList<Integer> accounts) {
+        public void setAccounts(ArrayList<Account> accounts) {
                 this.accounts = accounts;
         }
         //endregion
@@ -67,9 +67,9 @@ public class User {
                         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
                         psSetUserData = conn.prepareStatement("UPDATE accounts SET balance = ? WHERE accountId = ?");
                         //store account data in database
-                        for (int accountNumber: accounts) {
+                        for (Account a: accounts) {
                                 psSetUserData.setInt(1, total_balance);
-                                psSetUserData.setInt(2, accountNumber);
+                                psSetUserData.setInt(2, );
                                 psSetUserData.executeUpdate();
                         }
 

@@ -25,14 +25,14 @@ public class adminController implements Initializable {
 return_link.setOnAction(event -> DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null));
         deposit_btn.setOnAction(event -> {
             try {
-                DBUtils.getUser().deposit(Integer.parseInt(deposit_tf.getText()));
+                DBUtils.getUser().getAccounts().get(0).deposit(Integer.parseInt(deposit_tf.getText()));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
         withdraw_btn.setOnAction(event -> {
             try {
-                DBUtils.getUser().withdraw(Integer.parseInt(withdraw_tf.getText()));
+                DBUtils.getUser().getAccounts().get(0).withdraw(Integer.parseInt(withdraw_tf.getText()));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
