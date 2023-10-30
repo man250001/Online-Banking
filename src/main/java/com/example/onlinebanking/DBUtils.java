@@ -44,7 +44,7 @@ public class DBUtils {
             throws SQLException {
         Connection conn;
         PreparedStatement psCheckIfUserExists;
-        PreparedStatement psInsertUser = null;
+        
         PreparedStatement psInsertAccount;
         PreparedStatement psInsertUserLogin;
         ResultSet resultSet;
@@ -64,13 +64,12 @@ public class DBUtils {
                 alert.setContentText("This user already exists!");
                 alert.show();
                 resultSet.close();
-                psInsertUser.close();
                 psCheckIfUserExists.close();
                 conn.close();
                 return false;
             }
         }
-
+        PreparedStatement psInsertUser = null;
         // Add a new user to the users table
         psInsertUser = conn.prepareStatement("insert into users (f_name, l_name) values (?, ?)");
         psInsertUser.setString(1, firstname);
