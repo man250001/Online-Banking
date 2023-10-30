@@ -33,7 +33,7 @@ public class Login_Controller implements Initializable {
                 if (DBUtils.logInUser(event, username_tf.getText(), password_pf.getText())) {
                     incorrect_label.setVisible(false);
                     DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
-                }else{
+                } else {
                     incorrect_label.setVisible(true);
                 }
             } catch (Exception e) {

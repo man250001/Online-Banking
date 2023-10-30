@@ -31,10 +31,11 @@ public class Signup_Controller implements Initializable {
         login_link.setOnAction(event -> DBUtils.changeScene(event, "login.fxml", "Login", null, null));
         Signup_bttn.setOnAction(event -> {
             try {
-                if (DBUtils.signUpUser(event, username_tf.getText(), password_pf.getText(), firstname_tf.getText(), lastname_tf.getText())) {
+                if (DBUtils.signUpUser(event, username_tf.getText(), password_pf.getText(), firstname_tf.getText(),
+                        lastname_tf.getText())) {
                     taken_label.setVisible(false);
                     DBUtils.changeScene(event, "homePage.fxml", "Home Page", null, null);
-                }else{
+                } else {
                     taken_label.setVisible(true);
                 }
             } catch (SQLException e) {
