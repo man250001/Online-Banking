@@ -11,16 +11,18 @@ public class Transaction {
         this.accountNumber = accountNumber;
     }
 
-    //region Getters and Setters
+    // region Getters and Setters
     public int getAmount() {
         return amount;
     }
+
     public String getDescriptor() {
         return descriptor;
     }
+
     public int getAccountNumber() {
         return accountNumber;
     }
-    //endregion
+    // endregion
 
 }
