@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-@SuppressWarnings({ "unused", "DataFlowIssue" })
+@SuppressWarnings({ "unused"})
 public class DBUtils {
 
     static User currentUser;
@@ -69,7 +69,7 @@ public class DBUtils {
                 return false;
             }
         }
-        PreparedStatement psInsertUser = null;
+        PreparedStatement psInsertUser;
         // Add a new user to the users table
         psInsertUser = conn.prepareStatement("insert into users (f_name, l_name) values (?, ?)");
         psInsertUser.setString(1, firstname);
