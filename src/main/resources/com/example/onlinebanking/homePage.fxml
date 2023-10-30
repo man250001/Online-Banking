@@ -13,8 +13,8 @@
       <AnchorPane layoutX="196.0" prefHeight="84.0" prefWidth="404.0" styleClass="banner" stylesheets="@banking.css" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0">
          <children>
             <Hyperlink fx:id="signout_link" layoutX="26.0" layoutY="47.0" stylesheets="@banking.css" text="Sign Out" />
-            <Hyperlink fx:id="checkingaccount_link" layoutX="147.0" layoutY="47.0" stylesheets="@banking.css" text="Withdraw" />
-            <Hyperlink fx:id="savingsaccount_link" layoutX="274.0" layoutY="47.0" stylesheets="@banking.css" text="Deposit" />
+            <Hyperlink fx:id="withdraw_link" layoutX="147.0" layoutY="47.0" stylesheets="@banking.css" text="Withdraw" />
+            <Hyperlink fx:id="deposit_link" layoutX="274.0" layoutY="47.0" stylesheets="@banking.css" text="Deposit" />
             <Hyperlink fx:id="transfer_link" layoutX="401.0" layoutY="47.0" stylesheets="@banking.css" text="Transfer" />
             <Hyperlink fx:id="payBills_link" layoutX="506.0" layoutY="47.0" stylesheets="@banking.css" text="Pay Bills" />
             <Label alignment="CENTER" prefHeight="43.0" prefWidth="135.0" styleClass="white_text" stylesheets="@banking.css" text="Home Page">
