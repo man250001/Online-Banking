@@ -13,36 +13,35 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-@SuppressWarnings({"unused", "DataFlowIssue"})
+@SuppressWarnings({ "unused", "DataFlowIssue" })
 public class DBUtils {
 
     static User currentUser;
     public static int tempBalance = 1000;
-    // This method is used to change the scene when the user clicks on a hyperlink/button
-    public static void changeScene(ActionEvent event, String _fxmlFile, String _title, String _username, String _password)
-    {
+
+    // This method is used to change the scene when the user clicks on a
+    // hyperlink/button
+    public static void changeScene(ActionEvent event, String _fxmlFile, String _title, String _username,
+            String _password) {
         try {
             FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(_fxmlFile));
             Parent root = loader.load();
 
             Platform.runLater(() -> {
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setTitle(_title);
                 stage.setResizable(false);
                 stage.setScene(new Scene(root, 600, 400));
                 stage.show();
             });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (NullPointerException e){
-            throw new RuntimeException(e);
-        }catch (RuntimeException e){
+        } catch (IOException | RuntimeException e) {
             throw new RuntimeException(e);
         }
     }
 
     // This method is used to add a new user to the database when they sign up
-    public static boolean signUpUser(ActionEvent event, String username, String pwd, String firstname, String lastname) throws SQLException {
+    public static boolean signUpUser(ActionEvent event, String username, String pwd, String firstname, String lastname)
+            throws SQLException {
         Connection conn;
         PreparedStatement psCheckIfUserExists;
         PreparedStatement psInsertUser = null;
@@ -79,7 +78,9 @@ public class DBUtils {
         psInsertUser.executeUpdate();
 
         // Get the user id of the user that was just created
-        PreparedStatement psGetUserId = conn.prepareStatement("select userId from users where f_name = ? and l_name = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        PreparedStatement psGetUserId = conn.prepareStatement(
+                "select userId from users where f_name = ? and l_name = ?", ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_UPDATABLE);
         psGetUserId.setString(1, firstname);
         psGetUserId.setString(2, lastname);
 
@@ -124,7 +125,8 @@ public class DBUtils {
         return true;
     }
 
-    // This method is used to log in a user when supplying a correct username and password
+    // This method is used to log in a user when supplying a correct username and
+    // password
     public static boolean logInUser(ActionEvent event, String username, String pwd) throws Exception {
         try {
             Connection conn;
@@ -136,14 +138,15 @@ public class DBUtils {
             psCheckIfUserExists.setString(1, username);
             resultSet = psCheckIfUserExists.executeQuery();
 
-
             while (resultSet.next()) {
                 String retrievedPassword = resultSet.getString("pwd");
 
                 if (retrievedPassword.equals(pwd)) {
-                    //Get f_name and l_name and userid from users using the username of the user that is logging in
+                    // Get f_name and l_name and userid from users using the username of the user
+                    // that is logging in
                     PreparedStatement psGetUserDetails = conn.prepareStatement("SELECT * FROM users WHERE userId = ?");
-                    PreparedStatement psGetUserAccount = conn.prepareStatement("SELECT * FROM accounts WHERE userId = ?");
+                    PreparedStatement psGetUserAccount = conn
+                            .prepareStatement("SELECT * FROM accounts WHERE userId = ?");
                     psGetUserDetails.setInt(1, resultSet.getInt("userId"));
                     psGetUserAccount.setInt(1, resultSet.getInt("userId"));
                     ResultSet userDetails = psGetUserDetails.executeQuery();
@@ -154,7 +157,7 @@ public class DBUtils {
                     int userid = userDetails.getInt("userId");
                     int total_balance = 0;
                     ArrayList<Account> accountNumbers = new ArrayList<>();
-                    while (userAccount.next()){
+                    while (userAccount.next()) {
                         accountNumbers.add(new Account(userAccount.getInt("balance"), userAccount.getInt("accountId")));
                         total_balance += userAccount.getInt("balance");
                     }
@@ -186,9 +189,9 @@ public class DBUtils {
         }
     }
 
-    //region get currentUser
+    // region get currentUser
     public static User getUser() {
         return currentUser;
     }
-    //endregion
+    // endregion
 }
