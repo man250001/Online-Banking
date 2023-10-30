@@ -15,10 +15,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unchecked")
 public class HomePage_Controller implements Initializable {
 
     @FXML
-    private Hyperlink checkingaccount_link, payBills_link, savingsaccount_link, signout_link, transfer_link, admin_link;
+    private Hyperlink withdraw_link, payBills_link, deposit_link, signout_link, transfer_link, admin_link;
 
     @FXML
     private Label balance_label;
@@ -44,14 +45,15 @@ public class HomePage_Controller implements Initializable {
         account_cb.setItems(accountList);
 
         balance_label.setText("Select an account to view balance");
-        checkingaccount_link.setOnAction(event -> DBUtils.changeScene(event, "Deposit.fxml", "Checking Account", null, null));
+        deposit_link.setOnAction(event -> DBUtils.changeScene(event, "Deposit.fxml", "Checking Account", null, null));
         payBills_link.setOnAction(event -> DBUtils.changeScene(event, "payBills.fxml", "Pay Bills", null, null));
-        savingsaccount_link.setOnAction(event -> DBUtils.changeScene(event, "Withdraw.fxml", "Savings Account", null, null));
+        withdraw_link.setOnAction(event -> DBUtils.changeScene(event, "Withdraw.fxml", "Savings Account", null, null));
         signout_link.setOnAction(event -> {
             DBUtils.getUser().signOutUser();
             DBUtils.changeScene(event, "login.fxml", "Login", null, null);
         });
-        transfer_link.setOnAction(event -> DBUtils.changeScene(event, "transferFunds.fxml", "Transfer Funds", null, null));
+        transfer_link
+                .setOnAction(event -> DBUtils.changeScene(event, "transferFunds.fxml", "Transfer Funds", null, null));
         admin_link.setOnAction(event -> DBUtils.changeScene(event, "adminPage.fxml", "Admin", null, null));
         account_cb.setOnAction(event -> {
             // Get the selected account from the ChoiceBox
@@ -60,15 +62,13 @@ public class HomePage_Controller implements Initializable {
             // Set the balance label to the balance of the selected account
             balance_label.setText("$" + selectedAccount.getBalance());
 
-            
-            List<String> userTransactions = DBUtils.getUser().getTransactionsByAccountNum(selectedAccount.getAccountNumber());
+            List<String> userTransactions = DBUtils.getUser()
+                    .getTransactionsByAccountNum(selectedAccount.getAccountNumber());
             ObservableList<String> transactionList = FXCollections.observableArrayList(userTransactions);
 
-            
             transaction_tbl.setItems(transactionList);
             Amount_col.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 
-            
             transaction_tbl.getColumns().setAll(Amount_col);
         });
     }
