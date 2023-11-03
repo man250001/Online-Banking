@@ -6,8 +6,6 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class User {
 
-        // note to Moron(Self) get accounts and make withdraw/deposit functionality work
-
         String firstname, lastname;
         int userid, total_balance;
         ArrayList<Account> accounts;
