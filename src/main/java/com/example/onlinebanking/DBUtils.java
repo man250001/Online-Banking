@@ -57,7 +57,6 @@ public class DBUtils {
 
         // Check if the user to be added already exists
         while (resultSet.next()) {
-            System.out.println("test");
             if (resultSet.getString("username").equals(username)) {
                 System.out.println("User already exists!");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -129,7 +128,7 @@ public class DBUtils {
     public static boolean logInUser(ActionEvent event, String username, String pwd) throws Exception {
         try {
             Connection conn;
-            PreparedStatement psCheckIfUserExists;
+            PreparedStatement psCheckIfUserExists
             ResultSet resultSet;
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/banking", "root", "password");
